@@ -1,0 +1,56 @@
+.modal-confirm {
+    color: #636363;
+
+    &.fadeInDown {
+        -webkit-animation-name: fadeInDown;
+        animation-name: fadeInDown;
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    &.wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        min-height: 100%;
+        padding: 20px;
+    }
+
+    .modal-content {
+        padding: 0px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .modal-header {
+        border-bottom: none;
+        position: relative;
+    }
+
+    .modal-body {
+        padding: 0px;
+        padding-bottom: 5%;
+    }
+
+    .icon-box {
+        margin: 0 auto;
+        z-index: 9;
+        text-align: center;
+        font-size: 36px;
+        &.icon-error {
+            color: #f6146f;
+        }
+        &.icon-warning {
+            color: #ed5500;
+        }
+        &.icon-success {
+            color: #00cca5;
+        }
+    }
+}

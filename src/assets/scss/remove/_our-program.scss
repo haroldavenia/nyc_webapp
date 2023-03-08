@@ -1,0 +1,52 @@
+.our-program {
+    margin-bottom: 20px;
+    border: 1px solid #e6e6e6;
+    .panel-heading {
+        padding: 0;
+        & > button {
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        padding: 0;
+        }
+    }
+
+    .card-body {
+        border-bottom: 1px solid #dcdada;
+    }
+
+    h3, i {
+    color: #004859;
+    }
+    
+    h3.panel-title{
+        background-color: #f9f9f9;
+        display: inline;
+        @media #{$xs-layout} {
+            line-height: 22px;
+            font-size: 14px;
+            padding: 16px 30px 16px 40px;
+        }
+        font-size: 16px;
+        color: #004859;
+        line-height: 1;
+        border-bottom: initial;
+        padding: initial;
+        text-transform: capitalize !important;
+        font-weight: 500;
+        font-size: 16px;
+        margin-top: 10px;
+  
+    }
+    .active-panel h3,
+    .active-panel i {
+      color: #c91b1b;
+      font-weight: 600;
+    }
+    .panel-heading:hover h3,
+    .panel-heading:hover i {
+      color: #004859;
+      font-weight: 700;
+    }
+}

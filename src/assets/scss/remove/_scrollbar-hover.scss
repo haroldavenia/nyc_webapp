@@ -1,0 +1,38 @@
+.scrollhost::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollhost-container {
+  position: relative;
+  height: 100%;
+}
+.scrollhost {
+  overflow: auto;
+  height: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+}
+
+.scroll-bar {
+  width: 10px;
+  height: 100%;
+  right: 0;
+  top: 0px;
+  position: absolute;
+  border-radius: 7px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.thumb-vertical {
+  position: relative;
+  display: block;
+  width: 90%;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 105px;
+  transform: translateY(0px);
+  z-index: 100;
+}

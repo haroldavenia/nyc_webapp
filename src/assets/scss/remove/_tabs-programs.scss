@@ -1,0 +1,386 @@
+.nav-tabs {
+
+    display: flex;
+}
+
+.nav-tabs a {
+    flex: 1 1;
+    ;
+    align-items: stretch;
+    border: 1px solid #111 !important;
+    border-radius: 0px !important;
+    text-align: center;
+    background-color: #222;
+    color: #fff;
+    padding: 20px 10px;
+}
+
+.nav-tabs a:hover {
+    flex: 1 1;
+    ;
+    align-items: stretch;
+    border-radius: 0px !important;
+    text-align: center;
+    background-color: #444;
+    color: #fff;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    background-color: #c91b1b;
+    border: 1px solid #c91b1b !important;
+    color: #fff;
+}
+
+.tab-content {
+    background-color: #fff;
+    border: thin solid #ccc;
+    border-radius: 2px;
+    padding-bottom: 20px;
+}
+
+.accordion>.card>.card-header {
+    font-size: 16px;
+    padding: 10px;
+    margin: 0px;
+}
+
+.accordion div {
+    margin: 0px;
+}
+
+button h3 {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1;
+}
+
+
+.single-my-account h3 {
+    color: #004859;
+}
+
+.single-my-account h3.panel-title {
+    font-size: 16px;
+    color: #004859;
+    line-height: 1;
+    margin-top: 10px;
+    border-bottom: initial;
+    padding: initial;
+    text-transform: capitalize !important;
+    font-weight: 400;
+}
+
+.single-my-account h3.panel-title span {
+    color: #004859;
+    left: initial;
+    font-size: 16px;
+    top: initial;
+    position: initial;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.single-my-account h3.panel-title::before {
+    font-family: 'Fontawesome';
+    content: '\f078 ';
+    top: 0;
+}
+
+.single-my-account .myaccount-info-wrapper {
+    padding: 20px 20px;
+}
+
+
+.single-my-account .myaccount-info-wrapper .account-info-wrapper {
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.single-my-account .myaccount-info-wrapper .account-info-wrapper h4 {
+    font-size: 16px;
+    margin: initial;
+    padding: initial;
+    color: #004859;
+    font-weight: 600;
+}
+
+.single-my-account .myaccount-info-wrapper .account-info-wrapper h5 {
+    font-size: 16px;
+    margin: initial;
+    padding: initial;
+    color: #c91b1b;
+}
+
+.single-my-account .myaccount-info-wrapper .row {
+    margin: initial !important;
+}
+
+.react-tel-input .form-control {
+    width: 100% !important;
+}
+
+
+.accordion .markdown {
+    &__content {
+        .image {
+            img {
+                text-align: center !important;
+            }
+
+            @media #{$md-layout, $xs-layout} {
+                margin-bottom: 0px;
+            }
+        }
+
+        .image div a {
+            position: relative;
+            top: -45px;
+            left: 20px;
+        }
+
+        .image .link-simbol {
+            margin-right: 5px;
+        }
+
+        .image div span {
+            vertical-align: middle;
+        }
+
+        .image div i {
+            vertical-align: middle;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        a {
+            font-weight: 600;
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        ol {
+            list-style-type: decimal;
+            margin: 10px;
+            padding-left: 30px;
+
+            li::marker {
+                color: #c91b1b;
+                font-weight: 500;
+            }
+        }
+
+        ul {
+            list-style-type: inherit;
+            margin: 10px;
+            padding-left: 30px;
+
+            li::marker {
+                color: #004859;
+            }
+        }
+
+        .link-simbol {
+            padding: 0;
+            margin: 15px 0;
+
+            i {
+                color: #c91b1b;
+                vertical-align: middle;
+                margin: 0 10px 0 0;
+                font-size: 50px;
+            }
+        }
+
+        h5,
+        h4,
+        h3,
+        h2,
+        h1 {
+            font-family: $josefin;
+            color: #004859;
+
+            @media #{$md-layout, $xs-layout} {
+                margin-left: 0;
+            }
+        }
+
+        h5 {
+            font-size: 18px;
+            font-weight: 500;
+
+            @media #{$xs-layout} {
+                font-size: 25px;
+            }
+        }
+
+        h4 {
+            font-size: 20px;
+            font-weight: 500;
+
+            @media #{$xs-layout} {
+                font-size: 14px;
+            }
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 600;
+
+            @media #{$xs-layout} {
+                font-size: 16px;
+            }
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+
+            @media #{$xs-layout} {
+                font-size: 18px;
+            }
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+
+            @media #{$xs-layout} {
+                font-size: 25px;
+            }
+        }
+        em {
+            font-style: italic;
+        }
+        .text {
+            font-size: 16px;
+
+            color: #313131;
+        }
+
+        .link {
+            font-family: $josefin;
+
+            a {
+
+                font-size: 20px;
+                font-weight: 5000;
+                padding: 15px 30px;
+                border: thin solid #c91b1b;
+                background-color: #c91b1b;
+                display: initial;
+                color: #FFF;
+
+                &:hover {
+                    font-size: 20px;
+                    font-weight: 5000;
+                    padding: 15px 30px;
+                    border: thin solid #c91b1b;
+                    background-color: #FFF;
+                    color: #c91b1b;
+
+                }
+            }
+        }
+
+        blockquote {
+            display: block;
+            background: #fff;
+            padding: 15px 20px 15px 45px;
+            margin: 20px 0 20px;
+            position: relative;
+
+            /*Font*/
+            font-family: Georgia, serif;
+            font-size: 16px;
+            line-height: 1.2;
+            color: #666;
+            text-align: justify;
+
+            /*Borders - (Optional)*/
+            border-left: 15px solid #c91b1b;
+            border-right: 2px solid #c91b1b;
+
+            /*Box Shadow - (Optional)*/
+            -moz-box-shadow: 2px 2px 15px #ccc;
+            -webkit-box-shadow: 2px 2px 15px #ccc;
+            box-shadow: 2px 2px 15px #ccc;
+            p {
+                display: contents;
+            }
+            ::before {
+                content: "\201C";
+                /*Unicode for Left Double Quote*/
+
+                /*Font*/
+                font-family: Georgia, serif;
+                font-size: 50px;
+                font-weight: bold;
+                color: #004859;
+
+                /*Positioning*/
+                position: absolute;
+                left: 10px;
+                top: 20px;
+            }
+            ::after {
+                /*Reset to make sure*/
+                content: '\201D';
+                /*Font*/
+                font-family: Georgia, serif;
+                font-size: 50px;
+                font-weight: bold;
+                color: #004859;
+                padding-left: 5px;
+                /*Positioning*/
+                position: absolute;
+                top: 20px;
+            }
+            a {
+                text-decoration: none;
+                background: #eee;
+                cursor: pointer;
+                padding: 0 3px;
+                color: #0056b3;
+            }
+            a:hover {
+                color: #666;
+            }
+            em {
+                font-style: italic;
+            }
+        }
+        
+
+        button {
+            border: none;
+            background: none;
+
+            i {
+                font-size: 50px;
+                color: #c91b1b;
+            }
+        }
+
+        .btn-watch {
+            color: #c91b1b;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .btn-watch i {
+            vertical-align: middle;
+            margin: 0 10px 0 0;
+        }
+
+        .btn-watch span {
+            vertical-align: middle;
+            font-size: 20px;
+        }
+
+    }
+}

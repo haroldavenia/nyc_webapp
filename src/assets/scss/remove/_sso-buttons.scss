@@ -1,0 +1,121 @@
+.login-register-wrapper .tab-content{
+    padding: 0;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+    border-top: thin solid #ccc;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom button{
+    min-width: 300px;
+    text-transform: capitalize;
+    font-size: 16px;
+    background-color: #c91b1b;
+    color: #FFF;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom button:hover{
+    background-color: #b31919;
+    color: #FFF;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .facebook{
+    background-color: #1877f2;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .facebook:hover{
+    background-color: #1c69cc;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .facebook::before{
+    content: "\f230";
+    font-family: 'Fontawesome';
+    line-height: 0.7;
+    vertical-align: middle;
+    font-size: 22px;
+    position: relative;
+    left: -86px;
+    top: -0px;
+    color: #FFF;
+    padding: 10px;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .facebook span{
+    position: relative;
+    left: -18px;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .twitter{
+    background-color: #00ACEE;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .twitter:hover{
+    background-color: #1692c1;
+}
+
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .twitter::before{
+    content: "\f099";
+    font-family: 'Fontawesome';
+    line-height: 0.7;
+    vertical-align: middle;
+    font-size: 22px;
+    position: relative;
+    left: -99px;
+    top: -0px;
+    color: #FFF;
+    padding: 10px;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .twitter span{
+    position: relative;
+    left: -18px;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .gmail{
+    background-color: #EA4335;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .gmail:hover{
+    background-color: #da4134;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .gmail::before{
+    content: "\f1a0";
+    font-family: 'Fontawesome';
+    line-height: 0.7;
+    vertical-align: middle;
+    font-size: 22px;
+    position: relative;
+    left: -100px;
+    top: -0px;
+    color: #FFF;
+    padding: 10px;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .gmail span{
+    position: relative;
+    left: -18px;
+}
+
+
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .apple{
+    background-color: #444;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .apple:hover{
+    background-color: #333;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .apple::before{
+    content: "\f179";
+    font-family: 'Fontawesome';
+    line-height: 0.7;
+    vertical-align: middle;
+    font-size: 22px;
+    position: relative;
+    left: -100px;
+    top: -0px;
+    color: #FFF;
+    padding: 10px;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box .button-login-custom .apple span{
+    position: relative;
+    left: -18px;
+}
+
+
+
+
+
+
