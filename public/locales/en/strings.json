@@ -1,0 +1,12 @@
+{
+    "Header": {
+        "title": "Property Information Portal",
+        "logo": "New York City"
+    },
+    "SignIn": {
+        "Login": "Login to the Property Information Portal",
+        "SignIn": "Sign In",
+        "SignOut": "Sign Out",
+        "Error": "Access Denied"
+    }
+}

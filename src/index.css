@@ -1,0 +1,10 @@
+@import 'https://js.arcgis.com/4.25/@arcgis/core/assets/esri/themes/light/main.css';
+@import 'https://js.arcgis.com/calcite-components/1.0.7/calcite.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+@import url('https://fonts.cdnfonts.com/css/public-sans');
+
+body {
+    margin: 0;
+    font-family: 'Public Sans';
+}
