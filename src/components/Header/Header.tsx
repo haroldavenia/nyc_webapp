@@ -12,7 +12,7 @@ const Header = () => {
     return (
         <HeaderStyled>
             <StyledBrandContainer>
-                <img src={logo} alt={t('Header.logo')} id="logo" />
+                <img src={logo} alt="Logo" id="logo" />
                 <h1>{t('Header.title')}</h1>
             </StyledBrandContainer>
             <SignOut />
