@@ -13,7 +13,7 @@ import { IAccountState } from '../models/app.model';
 export const AccountsContext = createContext<IAccountState>({});
 
 export const AccountsContextProvider = ({ children }: any) => {
-    const [userAccessVerified, setUserAccessVerified] = useState(false);
+    const [userAccessVerified, setUserAccessVerified] = useState<boolean | null>(null);
     const [errorMessage, setErrorMessage] = useState(null);
 
     const { auth } = AppConfig;

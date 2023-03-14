@@ -13,7 +13,7 @@ export interface IAccountState {
   signOut?: () => void,
   getAccountSessionStatus?: () => Promise<boolean>,
   getOriginRoute?: () => string | undefined,
-  userAccessVerified?: boolean,
+  userAccessVerified?: boolean | null,
   errorMessage?: string | null,
   account?: any,
   orgUrlKey?: string,
