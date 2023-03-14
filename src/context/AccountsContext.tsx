@@ -8,10 +8,12 @@ import useAccountManager from '../hooks/useAccountManager';
 import { getPortalItem } from '../services/arcgis';
 import AppConfig from '../constants/AppConfig';
 
-export const AccountsContext = createContext();
+import { IAccountState } from '../models/app.model';
 
-export const AccountsContextProvider = ({ children }) => {
-    const [userAccessVerified, setUserAccessVerified] = useState(null);
+export const AccountsContext = createContext<IAccountState>({});
+
+export const AccountsContextProvider = ({ children }: any) => {
+    const [userAccessVerified, setUserAccessVerified] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
 
     const { auth } = AppConfig;
@@ -56,7 +58,7 @@ export const AccountsContextProvider = ({ children }) => {
 
     // Verify user has access to appItemId
     const verifyAccess = useCallback(
-        async (account) => {
+        async (account: any) => {
             try {
                 const data = await getPortalItem(auth.appItemId, {
                     authentication: account?.session,
@@ -73,7 +75,7 @@ export const AccountsContextProvider = ({ children }) => {
                     setUserAccessVerified(true);
                     setErrorMessage(null);
                 }
-            } catch (err) {
+            } catch (err: any) {
                 setUserAccessVerified(false);
                 setErrorMessage(err.message);
             }

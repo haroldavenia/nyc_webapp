@@ -12,10 +12,11 @@ import './index.css';
 import './utilities/i18n';
 import AppConfig from './constants/AppConfig';
 
-esriConfig.apiKey = AppConfig.arcgis_api_key;
+// esriConfig.apiKey = AppConfig.arcgis_api_key;
 esriConfig.portalUrl = AppConfig.auth.portalUrl;
 setAssetPath('https://unpkg.com/@esri/calcite-components/dist/calcite/assets');
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = document.getElementById('root') as Element;
+ReactDOM.createRoot(root).render(
     <React.StrictMode>
         <AccountsContextProvider>
             <BrowserRouter>

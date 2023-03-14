@@ -1,6 +1,6 @@
 import { getItem } from '@esri/arcgis-rest-portal';
 
-export async function getPortalItem(portalItemId, requestOptions) {
+export async function getPortalItem(portalItemId: string, requestOptions: any) {
     try {
         const item = await getItem(portalItemId, requestOptions);
         return item;

@@ -1,13 +1,15 @@
 import { useRef, useEffect, useState } from 'react';
 import Search from '@arcgis/core/widgets/Search';
 
-export function useSearch(view, options = {}) {
+import { ISearch } from '../models/esri.model';
+
+export function useSearch(view: any = undefined, options = {}): [any, any] {
     // create a ref to element to be used as the map's container
-    const elRef = useRef(null);
+    const elRef = useRef();
     // hold on to the search in state
-    const [search, setSearch] = useState(null);
+    const [search, setSearch] = useState<ISearch>();
     // use a ref so we can use initial values in a componentDidMount-like effect
-    // otherwise we'd get a lint error, or have to make it a dependency of the effect
+    // otherwise we'd get a lint errSearchor, or have to make it a dependency of the effect
     // see: https://github.com/facebook/react/issues/15865#issuecomment-540715333
     const initialArguments = useRef({ view, options });
 
@@ -15,7 +17,7 @@ export function useSearch(view, options = {}) {
     useEffect(() => {
         // define local variables to be used in the clean up function
         let cancelled = false;
-        let _search;
+        let _search: any;
         async function load() {
             const { view, options } = initialArguments.current;
             if (cancelled) {

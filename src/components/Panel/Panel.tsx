@@ -14,7 +14,14 @@ import {
     StyledHeader,
 } from './Panel-styled';
 
-const Panel = ({ className, title = 'Sample Title', backText = 'Go Back', onBackClick, ...props }) => {
+interface IProps {
+    title?: string
+    backText?: string
+    onBackClick?(): void
+    children: React.ReactNode
+}
+
+const Panel: React.FC<IProps> = ({ title = 'Sample Title', backText = 'Go Back', onBackClick, children}) => {
     return (
         <StyledContainer>
             <StyledHeader>
@@ -28,7 +35,7 @@ const Panel = ({ className, title = 'Sample Title', backText = 'Go Back', onBack
                     ''
                 )}
             </StyledHeader>
-            <StyledBody>{props.children}</StyledBody>
+            <StyledBody>{children}</StyledBody>
         </StyledContainer>
     );
 };

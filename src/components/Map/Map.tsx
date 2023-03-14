@@ -14,7 +14,12 @@ import { useWatch } from '../../hooks/useWatch';
 // Component specific modules (Component-styled, etc.)
 import { StyledMap } from './Map-styled';
 
-const Map = ({ webmapId, isSelected }) => {
+interface IProps {
+    webmapId: string
+    isSelected: boolean 
+}
+
+const Map : React.FC<IProps> = ({ webmapId, isSelected }) => {
     // Get values from context
     const { mapView, updateMapView } = useAppContext();
 
@@ -22,21 +27,21 @@ const Map = ({ webmapId, isSelected }) => {
         view: ArcGIS.mapView,
     };
 
-    useEffect(()=> {
-        if(isSelected){
-            updateMapView(view, webmap);
-        }
-    }, [isSelected])
-
     // Get values from context
     // Use hooks to establish webmap
     const [ref, view, webmap] = useWebMap(webmapId, viewOptions);
+
+    useEffect(()=> {
+        if(isSelected){
+            updateMapView?.(view);
+        }
+    }, [isSelected])
 
     const handleMapReady = async () => {
         try {
             // Initialize map view
             // Update context
-            updateMapView(view, webmap);
+            updateMapView?.(view);
         } catch (err) {
             console.error(err);
         }

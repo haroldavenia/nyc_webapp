@@ -16,14 +16,14 @@ function AppSecured() {
     const { account, getAccountSessionStatus, signOut, userAccessVerified } = useAccountsContext();
 
     // ----- Authenticate -----
-    const authenticated = account?.token && getAccountSessionStatus(account);
+    const authenticated = account?.token && getAccountSessionStatus?.();
 
     // ----- Render -----
     if (authenticated && userAccessVerified) {
         return <App />;
     } else if (authenticated && userAccessVerified === false) {
-        signOut();
-        return;
+        signOut?.();
+        return null;
     } else if (!authenticated) {
         return <SignIn />;
     } else {

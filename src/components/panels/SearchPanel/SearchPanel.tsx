@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import BasicCard from '../../BasicCard';
+import { ILayer } from "@esri/arcgis-rest-types";
 
 // Hooks, context, and constants
 import AppRoutes from '../../../constants/AppRoutes';
@@ -21,7 +22,7 @@ const SearchPanel = () => {
     const navigate = useNavigate();
     const { parcelLayerView, updateSelectedParcel } = useAppContext();
     const { mapView } = useAppContext();
-    const searchEl = useRef();
+    const searchEl = useRef<HTMLElement | null>(null);
 
     useEffect(() => {
     }, [])
@@ -36,16 +37,19 @@ const SearchPanel = () => {
             return;
         }*/
 
+    
+
         searchElement = new Search({ 
             view: mapView,
             container: searchEl.current,
             includeDefaultSources: false,
             sources: [
                 {
-                    layer: parcelLayerView.layer,
-                    searchFields: ["BBL"],
-                    displayField: "BBL",
-                    exactMatch: false,
+                    // TODO: Search Properties https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#constructors-summary
+                    // layer: parcelLayerView.layer,
+                    // searchFields: ["BBL"],
+                    // displayField: "BBL",
+                    // exactMatch: false,
                     outFields: ["*"],
                     placeholder: "Search by BBL",
                     maxResults: 6,
@@ -65,20 +69,20 @@ const SearchPanel = () => {
 
     }, [mapView, searchEl.current, parcelLayerView])
 
-    const handleSearchComplete = async (searchResult) => {
+    const handleSearchComplete = async (searchResult: __esri.SearchResult) => {
         const { feature } = searchResult;
         
         try {
-            const queryResults = await parcelLayerView.layer.queryFeatures({
+            const queryResults = await parcelLayerView?.layer.queryFeatures({
                 where: '1=1',
                 outFields: ['*'],
                 returnGeometry: true,
                 geometry: feature.geometry,
             });
-            const firstFeature = queryResults.features[0];
+            const firstFeature = queryResults?.features[0];
 
             if (firstFeature) {
-                updateSelectedParcel(firstFeature);
+                updateSelectedParcel?.(firstFeature);
                 navigate(AppRoutes.parcel.path.replace(':bbl', firstFeature.attributes.BBL));
             } else {
                 console.error('TODO: handle a miss from data query');
@@ -91,7 +95,7 @@ const SearchPanel = () => {
     return (
         <Panel title="Find a Property">
             <BasicCard>
-                <SearchStyled ref={searchEl} />
+                <SearchStyled searchRef={searchEl} />
             </BasicCard>
         </Panel>
     );

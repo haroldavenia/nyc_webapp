@@ -1,16 +1,21 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, SetStateAction } from 'react';
 import { loadView, destroyView } from './utils/arcgis';
 
-export function useWebMap(map, options = {}) {
+import { 
+    IMapView, 
+    IMap,
+} from '../models/esri.model';
+
+export const useWebMap = (map: string, options: any = {}) => {
     return useView(map, options);
 }
 
-function useView(map, options) {
+function useView(map: string, options: any): [any, IMapView, IMap] {
     // create a ref to element to be used as the map's container
-    const elRef = useRef(null);
+    const elRef = useRef<any>();
     // hold on to the view in state
-    const [view, setView] = useState(null);
-    const [webmap, setWebmap] = useState(null);
+    const [view, setView] = useState<IMapView>();
+    const [webmap, setWebmap] = useState<IMap>();
     // use a ref so we can use initial values in a componentDidMount-like effect
     // otherwise we'd get a lint error, or have to make it a dependency of the effect
     // see: https://github.com/facebook/react/issues/15865#issuecomment-540715333
@@ -20,7 +25,7 @@ function useView(map, options) {
     useEffect(() => {
         // define local variables to be used in the clean up function
         let cancelled = false;
-        let _view;
+        let _view: IMapView;
         async function load() {
             const { map, options } = initialArguments.current;
             const loadViewResults = await loadView(map, options);

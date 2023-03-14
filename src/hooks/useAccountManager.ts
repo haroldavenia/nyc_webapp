@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
+import { IAccountManagerOptions } from '../models/app.model';
+
 import {
     beginLogin,
     completeLogin,
@@ -22,7 +24,7 @@ import {
 } from './utils/accountManagerStorageUtils';
 
 const useAccountManager = (
-    options = {
+    options: IAccountManagerOptions = {
         clientId: null,
         redirectUri: null,
         portalUrl: 'https://www.arcgis.com/sharing',
@@ -101,7 +103,7 @@ const useAccountManager = (
     /** Logout Account: Remove token and session from user auth object and attempt revoke token*/
     const logoutAccount = useCallback(
         async (account = null) => {
-            const { session, token, key } = account || {};
+            const { session, token, key }: any = account || {};
             const valid = validAccount(account);
 
             if (session && token && valid) {
@@ -126,7 +128,7 @@ const useAccountManager = (
     const removeAccount = useCallback(
         async (account = null) => {
             const valid = validAccount(account);
-            const { session, token, key } = account || {};
+            const { session, token, key }: any = account || {};
             if (valid) {
                 //Revoke token
                 if (token) {
@@ -152,7 +154,7 @@ const useAccountManager = (
     /** Restore Account: Log in to an existing account that is logged out */
     const restoreAccount = async (account = null) => {
         // Get type from account
-        const { portal } = account || {};
+        const { portal }: any = account || {};
         const { appInfo, portalHostname, user } = portal || {};
         const { appId } = appInfo || {};
         const { username } = user || {};
@@ -166,7 +168,7 @@ const useAccountManager = (
 
             if (redirectUri) {
                 //set localstorage status
-                beginStatusStorage(managerName, { clientId, redirectUri, portalUrl, popup }, originRoute);
+                beginStatusStorage(managerName, { clientId, redirectUri, portalUrl, popup }, originRoute, undefined);
                 //begin login
                 beginLogin(
                     managerName,
@@ -190,13 +192,13 @@ const useAccountManager = (
     };
 
     /** Refresh Account */
-    const refreshAccount = async (account = null) => {
-        const { portal } = account || {};
-        const response = refresh(account);
+    const refreshAccount = async (account: any = null) => {
+        const { portal }: any = account || {};
+        const response: any = refresh(account);
 
         if (response.success && response.session) {
             refreshAccountStorage(managerName, {
-                key: account.key,
+                key: account?.key,
                 session: response.session,
             });
         } else {
@@ -214,7 +216,7 @@ const useAccountManager = (
 
                     if (redirectUri) {
                         //set localstorage status
-                        beginStatusStorage(managerName, { clientId, redirectUri, portalUrl, popup }, originRoute);
+                        beginStatusStorage(managerName, { clientId, redirectUri, portalUrl, popup }, originRoute, undefined);
                         //begin login
                         beginLogin(
                             managerName,
@@ -249,7 +251,7 @@ const useAccountManager = (
     );
 
     /** Check token status */
-    const verifyToken = useCallback(async ({ session, token }) => {
+    const verifyToken = useCallback(async ({ session, token }: any) => {
         if (session && token) {
             try {
                 const { portal } = session || {};
@@ -268,7 +270,7 @@ const useAccountManager = (
     /** Logout all accounts */
     const logoutAllAccounts = useCallback(async () => {
         Object.entries(accountManagerState.accounts).map(async ([key, account]) => {
-            const { session, token } = account || {};
+            const { session, token }: any = account || {};
 
             if (session && token) {
                 const message = await logout(account);
@@ -287,7 +289,7 @@ const useAccountManager = (
     /** Remove all accounts */
     const removeAllAccounts = useCallback(async () => {
         Object.entries(accountManagerState.accounts).map(async ([key, account]) => {
-            const { session, token } = account || {};
+            const { session, token }: any = account || {};
 
             //Revoke token
             if (session && token) {
@@ -307,7 +309,7 @@ const useAccountManager = (
     // Helper Functions
     const validAccount = useCallback(
         (account = null) => {
-            const { key } = account || {};
+            const { key }: any = account || {};
             if (key) {
                 const valid = accountManagerState ? (accountManagerState.accounts[key] ? true : false) : false;
                 return valid;

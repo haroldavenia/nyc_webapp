@@ -5,19 +5,23 @@ import { useAppContext } from '../../context/AppContext';
 import { useSearch } from '../../hooks/useSearch';
 import { SearchStyled } from './Search-styled';
 
-const Search = ({ onSearchComplete }) => {
+interface IProps {
+    onSearchComplete(value: any): void
+}
+
+const Search: React.FC<IProps> = ({ onSearchComplete }) => {
     const [t] = useTranslation();
     const [searchElementRef, search] = useSearch();
-    const [completeHandler, setCompleteHandler] = useState();
+    const [completeHandler, setCompleteHandler] = useState<any>();
     const { mapView } = useAppContext();
 
     useEffect(() => {
         if (search) {
             if (!completeHandler) {
-                const searchCompleteHandle = search.on('search-complete', function (event) {
+                const searchCompleteHandle = search.on('search-complete', function (event: any) {
                     try {
                         const searchResult = event.results[0].results[0];
-                        mapView.goTo(searchResult.target);
+                        mapView?.goTo(searchResult.target);
                         if (onSearchComplete) {
                             onSearchComplete(searchResult);
                         }
@@ -36,7 +40,7 @@ const Search = ({ onSearchComplete }) => {
         };
     }, [completeHandler, search, mapView]);
 
-    return <SearchStyled ref={searchElementRef} />;
+    return <SearchStyled searchRef={searchElementRef} />;
 };
 
 export default Search;

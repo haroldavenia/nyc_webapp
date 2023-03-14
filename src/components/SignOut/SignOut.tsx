@@ -5,7 +5,7 @@ import { StyledButton } from './SignOut-styled';
 
 const SignOut = () => {
     const [t] = useTranslation();
-    const { signOut } = useAccountsContext();
+    const { signOut }: any = useAccountsContext();
 
     return (
         <StyledButton

@@ -107,7 +107,11 @@ export const StyledStreet = styled.p`
     padding: 0;
 `;
 
-export const StyledValue = styled.p`
+interface IProps {
+    bold?: boolean
+}
+
+export const StyledValue = styled.p<IProps>`
     color: ${(props) => (props.bold ? 'black' : 'gray')};
     font-size: 14px;
     font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};

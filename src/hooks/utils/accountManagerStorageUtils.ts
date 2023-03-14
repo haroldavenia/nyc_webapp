@@ -1,6 +1,6 @@
 import { UserSession } from '@esri/arcgis-rest-auth';
 
-export const getAccountManagerStorage = manager => {
+export const getAccountManagerStorage = (manager: string = '') => {
   const { accounts, active, status, order } = getLocalSerialized(manager) || {};
   const dAccounts = deserializeUserAuthObjects(accounts);
 
@@ -13,7 +13,7 @@ export const getAccountManagerStorage = manager => {
   return authObject;
 };
 
-export const addAccountStorage = (manager, account) => {
+export const addAccountStorage = (manager: string = '', account: { user?: any; portal?: string; session?: any; token?: any; key: any; }) => {
   const previous = getLocalSerialized(manager);
   const {
     accounts,
@@ -22,7 +22,7 @@ export const addAccountStorage = (manager, account) => {
   } = previous || {};
   const updateActive = setActive || !active ? account.key : active;
   const order = previous.order
-    ? previous.order.find(id => id === account.key)
+    ? previous.order.find((id: any) => id === account.key)
       ? [...previous.order]
       : [account.key, ...previous.order]
     : [account.key];
@@ -37,9 +37,9 @@ export const addAccountStorage = (manager, account) => {
   });
 };
 
-export const removeAccountStorage = (manager, { key }) => {
+export const removeAccountStorage = (manager: string = '', { key }: any) => {
   const previous = getLocalSerialized(manager);
-  const order = previous.order.filter(item => item !== key);
+  const order = previous.order.filter((item: any) => item !== key);
   delete previous.accounts[key];
 
   const active =
@@ -59,10 +59,10 @@ export const removeAccountStorage = (manager, { key }) => {
   });
 };
 
-export const switchActiveStorage = (manager, { key }) => {
+export const switchActiveStorage = (manager: string = '', { key }: any) => {
   const previous = getLocalSerialized(manager);
   const orders = previous.order ? previous.order : [];
-  const order = [key, ...orders.filter(item => item !== key)];
+  const order = [key, ...orders.filter((item: any) => item !== key)];
   setLocal({
     state: {
       ...previous,
@@ -73,7 +73,7 @@ export const switchActiveStorage = (manager, { key }) => {
   });
 };
 
-export const completeStatusStorage = manager => {
+export const completeStatusStorage = (manager: string = '') => {
   const previous = getLocalSerialized(manager);
   const { status } = previous || {};
   setLocal({
@@ -86,10 +86,10 @@ export const completeStatusStorage = manager => {
 };
 
 export const beginStatusStorage = (
-  manager,
-  { clientId, redirectUri, portalUrl, popup },
-  originRoute,
-  setActive
+  manager: string = '',
+  { clientId, redirectUri, portalUrl, popup }: { clientId: any; redirectUri: any; portalUrl: string; popup: any; },
+  originRoute: string,
+  setActive: boolean | undefined
 ) => {
   const previous = getLocalSerialized(manager);
 
@@ -107,7 +107,7 @@ export const beginStatusStorage = (
   });
 };
 
-export const logoutAccountStorage = (manager, { key }) => {
+export const logoutAccountStorage = (manager: string = '', { key }: any) => {
   const previous = getLocalSerialized(manager);
   const { accounts } = previous || {};
 
@@ -126,7 +126,7 @@ export const logoutAccountStorage = (manager, { key }) => {
   });
 };
 
-export const refreshAccountStorage = (manager, { key, session }) => {
+export const refreshAccountStorage = (manager: string = '', { key, session }: { key: any; session: any; }) => {
   const previous = getLocalSerialized(manager);
   const { accounts } = previous || {};
   setLocal({
@@ -140,12 +140,14 @@ export const refreshAccountStorage = (manager, { key, session }) => {
 
 //** State Management */
 
-const setLocal = ({ state, manager }) => {
+const setLocal = ({ state, manager }: any) => {
   window.localStorage.setItem(manager, JSON.stringify(state));
 };
 
-const getLocalSerialized = manager => {
-  const accountManager = JSON.parse(window.localStorage.getItem(manager));
+const getLocalSerialized = (manager: string = '') => {
+  const keyData: string | null = window.localStorage.getItem(manager)
+  const accountManager = keyData ? JSON.parse(keyData) : null;
+
   const { accounts, active, status, order } = accountManager || {};
   const authObject = {
     accounts,
@@ -156,8 +158,8 @@ const getLocalSerialized = manager => {
   return authObject;
 };
 
-const deserializeUserAuthObjects = accounts => {
-  const dUsers = {};
+const deserializeUserAuthObjects = (accounts: any) => {
+  const dUsers: any = {};
 
   if (accounts) {
     for (const [key] of Object.entries(accounts)) {

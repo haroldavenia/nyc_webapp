@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
+import { 
+    IMapView, 
+    IMap,
+} from '../models/esri.model';
 
-export function useWatches(obj, names, callback) {
+
+export function useWatches(obj: IMapView, names: string[], callback: () => void) {
     useEffect(() => {
         if (!obj) {
             return;
@@ -14,16 +19,16 @@ export function useWatches(obj, names, callback) {
     }, [obj, names, callback]);
 }
 
-export function useWatch(obj, name, callback) {
+export function useWatch(obj: IMapView, name: string, callback: () => void) {
     useWatches(obj, [name], callback);
 }
 
-export function useOnEvents(obj, names, callback) {
+export function useOnEvents(obj: IMapView, names: string[], callback: () => void) {
     useEffect(() => {
         if (!obj || typeof obj.on !== 'function') {
             return;
         }
-        const handles = names.map((name) => obj.on(name, callback));
+        const handles = names.map((name: any) => obj.on(name, callback));
         return function removeHandles() {
             handles.forEach((handle) => {
                 handle.remove();
@@ -32,6 +37,6 @@ export function useOnEvents(obj, names, callback) {
     }, [obj, names, callback]);
 }
 
-export function useOnEvent(obj, name, callback) {
+export function useOnEvent(obj: IMapView, name: string, callback: () => void) {
     useOnEvents(obj, [name], callback);
 }

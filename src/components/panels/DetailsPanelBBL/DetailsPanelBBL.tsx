@@ -1,10 +1,12 @@
 // Framework and third-party non-ui
 import React, { useEffect, useState } from 'react';
-
+import { IFeatureSet } from "@esri/arcgis-rest-types";
 // Hooks, context, and constants
 import AppRoutes from '../../../constants/AppRoutes';
 import { useAppContext } from '../../../context/AppContext';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import { IFeatureLayerView, ILayer, ILayerView, IFeatureLayer } from '../../../models/esri.model';
 
 // Component specific modules (Component-styled, etc.)
 import Panel from '../../Panel';
@@ -16,15 +18,22 @@ import {
     StyledLinksContainer,
     StyledPropertyCard,
 } from './DetailsPanelBBL-styled';
+
 import AppConfig from '../../../constants/AppConfig';
+
+interface attr_features {
+    attributes: {
+        [key: string]: any
+    }
+}
 
 const DetailsPanelBBL = () => {
     const navigate = useNavigate();
     const params = useParams();
     const { selectedParcel, updateSelectedParcel, parcelLayerView, mapView } = useAppContext();
-    const [moreData, setMoreData] = useState();
+    const [moreData, setMoreData] = useState<attr_features | any>();
     const hanldeBackClick = () => {
-        updateSelectedParcel(null);
+        updateSelectedParcel?.(undefined);
         navigate(AppRoutes.search.path);
     };
     useEffect(() => {
@@ -42,9 +51,9 @@ const DetailsPanelBBL = () => {
                         outFields: ['*'],
                         returnGeometry: true,
                     })
-                    .then((results) => {
+                    .then((results:any) => {
                         if (results?.features?.length) {
-                            updateSelectedParcel(results.features[0]);
+                            updateSelectedParcel?.(results.features[0]);
                         }
                     });
             }
@@ -54,15 +63,15 @@ const DetailsPanelBBL = () => {
                 outFields: ['*'],
                 returnGeometry: true,
             })
-            .then((results) => {
+            .then((results: any) => {
                 if (results?.features?.length) {
-                    updateSelectedParcel(results.features[0]);
+                    updateSelectedParcel?.(results.features[0]);
                 }
             });
         }
 
         if(mapView){
-            const moreDetailsLayer = mapView.map.tables.find((layer) => {
+            const moreDetailsLayer: any = mapView.map.tables.find((layer: any) => {
                 return (
                     layer?.portalItem?.id === AppConfig.detailsLayers.itemId && layer.id === AppConfig.detailsLayers.id
                 );
@@ -73,7 +82,7 @@ const DetailsPanelBBL = () => {
                 outFields: ['*'],
                 returnGeometry: false,
             })
-            .then((results) => {
+            .then((results:IFeatureSet) => {
                 if (results?.features?.length) {                    
                     setMoreData(results.features[0].attributes);
                 }

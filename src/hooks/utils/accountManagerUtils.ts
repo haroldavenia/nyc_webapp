@@ -4,11 +4,13 @@ import { request } from '@esri/arcgis-rest-request';
 
 import { addAccountStorage, getAccountManagerStorage } from './accountManagerStorageUtils';
 
+import { IAccountManagerOptions } from '../../models/app.model';
+
 //** Login Workflow*/
 //** ============= */
 
 //** Login */
-export const beginLogin = async (managerName, options, setAccountManagerState, type = 'OAuth2') => {
+export const beginLogin = async (managerName: string, options: any, setAccountManagerState: any, type = 'OAuth2') => {
     if (type === 'OAuth2') {
         loginOAuth2(managerName, options, setAccountManagerState);
     }
@@ -16,9 +18,9 @@ export const beginLogin = async (managerName, options, setAccountManagerState, t
 
 //** Login: Begin OAuth */
 export const loginOAuth2 = async (
-    managerName,
-    { clientId, redirectUri, portalUrl, popup, params },
-    setAccountManagerState
+    managerName: string,
+    { clientId, redirectUri, portalUrl, popup, params }: IAccountManagerOptions,
+    setAccountManagerState: any
 ) => {
     // params is an undocumented IOAuth2Option:
     // https://github.com/Esri/arcgis-rest-js/blob/master/packages/arcgis-rest-auth/src/UserSession.ts#L303
@@ -39,8 +41,8 @@ export const loginOAuth2 = async (
         try {
             const dSession = await UserSession.beginOAuth2({
                 // register an app of your own to create a unique clientId
-                clientId,
-                redirectUri,
+                clientId: clientId || "",
+                redirectUri: redirectUri || "",
                 portal,
                 popup,
                 params,
@@ -58,8 +60,8 @@ export const loginOAuth2 = async (
         try {
             UserSession.beginOAuth2({
                 // register an app of your own to create a unique clientId
-                clientId,
-                redirectUri,
+                clientId: clientId || "",
+                redirectUri: redirectUri || "",
                 portal,
                 popup,
                 params,
@@ -71,7 +73,7 @@ export const loginOAuth2 = async (
 };
 
 /** Complete auth and return account with serialized portal and session  */
-export const completeLogin = async (options, type = 'OAuth2') => {
+export const completeLogin = async (options: any, type = 'OAuth2') => {
     if (type === 'OAuth2') {
         const account = await completeOAuth2(options);
         return account;
@@ -79,13 +81,13 @@ export const completeLogin = async (options, type = 'OAuth2') => {
 };
 
 /** Login: Complete OAuth2  */
-export const completeOAuth2 = async ({ clientId, portalUrl, redirectUri, popup }) => {
+export const completeOAuth2 = async ({ clientId, portalUrl, redirectUri, popup }: IAccountManagerOptions) => {
     try {
         const portal = portalUrl ? portalUrl : 'https://www.arcgis.com/sharing';
         const dSession = UserSession.completeOAuth2({
-            clientId,
+            clientId: clientId || "",
             portal,
-            redirectUri,
+            redirectUri: redirectUri || "",
             popup,
         });
 
@@ -111,7 +113,7 @@ export const completeOAuth2 = async ({ clientId, portalUrl, redirectUri, popup }
 //** ============= */
 
 //** Logout */
-export const logout = async (account, type = 'OAuth2') => {
+export const logout = async (account: any, type = 'OAuth2') => {
     // Get type from account
     if (type === 'OAuth2') {
         const response = await logoutOAuth2(account);
@@ -120,7 +122,7 @@ export const logout = async (account, type = 'OAuth2') => {
 };
 
 //** Logout: OAuth2 */
-export const logoutOAuth2 = async ({ session, token }) => {
+export const logoutOAuth2 = async ({ session, token }: any) => {
     const url = session ? session.portal : null;
     const clientId = session ? session.clientId : null;
     //** Formal Logout requires esri_auth cookie */
@@ -153,14 +155,14 @@ export const logoutOAuth2 = async ({ session, token }) => {
 };
 
 //** Refresh Workflow*/
-export const refresh = async (account, type = 'OAuth2') => {
+export const refresh = async (account: any, type = 'OAuth2') => {
     if (type === 'OAuth2') {
         const response = await refreshOAuth2(account);
         return response;
     }
 };
 
-export const refreshOAuth2 = async ({ session, key } = {}) => {
+export const refreshOAuth2 = async ({ session, key }: any = {}) => {
     //UserSession.refreshSession [https://esri.github.io/arcgis-rest-js/api/auth/UserSession/#refreshSession]
     // refresh workflow for server oauth sessions (view authorize and exchangeAuthorizationCode)
     // No refresh for client side: https://github.com/Esri/arcgis-rest-js/issues/627#issuecomment-535644535
@@ -192,7 +194,7 @@ export const refreshOAuth2 = async ({ session, key } = {}) => {
 //** ======= */
 
 //** Get portal object */
-export const getPortal = async ({ portalUrl, session }) => {
+export const getPortal = async ({ portalUrl, session }: {portalUrl: string, session: any}) => {
     try {
         const portalObject = await getSelf({
             portal: portalUrl,
@@ -206,9 +208,9 @@ export const getPortal = async ({ portalUrl, session }) => {
 };
 
 //** Get Org Thumbnail */
-export const getOrgThumbnail = ({ session: { portal }, portal: { thumbnail, name }, token, orgImage }) => {
+export const getOrgThumbnail = ({ session: { portal }, portal: { thumbnail, name }, token, orgImage }: any) => {
     //org thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/portal-self.htm)
-    let orgThumbnail = {
+    let orgThumbnail: any = {
         url: undefined,
         letters: undefined,
     };
@@ -237,9 +239,9 @@ export const getUserThumbnail = ({
     user: { thumbnail, firstName, lastName, fullName },
     token,
     userImage,
-}) => {
+}: any) => {
     //user thumbnail (https://developers.arcgis.com/rest/users-groups-and-items/user.htm)
-    let userThumbnail = {
+    let userThumbnail: any = {
         url: undefined,
         letters: undefined,
     };
@@ -270,7 +272,7 @@ export const getUserThumbnail = ({
     return userThumbnail;
 };
 
-const createAccountObject = async ({ dSession, portal, clientId }) => {
+const createAccountObject = async ({ dSession, portal, clientId }: any) => {
     try {
         dSession.clientId = dSession.clientId ? dSession.clientId : clientId;
         const token = dSession.token;
@@ -295,7 +297,7 @@ const createAccountObject = async ({ dSession, portal, clientId }) => {
     }
 };
 
-const createAccountKey = ({ user, portal }) => {
+const createAccountKey = ({ user, portal }: any) => {
     try {
         const { customBaseUrl, portalHostname, urlKey, isPortal } = portal || {};
 

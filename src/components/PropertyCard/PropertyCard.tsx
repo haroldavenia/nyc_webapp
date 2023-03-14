@@ -37,21 +37,29 @@ import {
     StyledValueSection,
 } from './PropertyCard-styled';
 
-const PropertyCard = ({
-    className,
+interface IProps {
+    street: string,
+    borough: string,
+    block: string,
+    lot: string,
+    bbl: string,
+    ownerName1: string,
+    ownerName2?: string,
+    taxClass: string,
+    type: string
+}
+
+
+const PropertyCard: React.FC<IProps> =({
     street,
-    address,
     borough,
     block,
     lot,
     bbl,
     ownerName1,
     ownerName2,
-    taxes,
-    valuation,
     taxClass,
-    type,
-    ...props
+    type
 }) => {
     const [t] = useTranslation();
 

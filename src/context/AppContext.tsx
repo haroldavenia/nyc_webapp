@@ -1,27 +1,37 @@
 // Framework and third-party non-ui
+import Feature from 'esri/widgets/Feature';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { _updateMapView, _updateSelectedParcel } from './MapController';
 
-export const AppContext = createContext();
+import { IAppState } from '../models/app.model';
+import {
+    IMapView,
+    IGraphic,
+    ILayerView,
+    IHandle,
+    IFeatureLayerView,
+} from '../models/esri.model'
 
-export const AppContextProvider = ({ children }) => {
+export const AppContext = createContext<IAppState>({});
+
+export const AppContextProvider: React.FC<{children :React.ReactNode}>= ({ children }) => {
     // App Framework
-    const [selectedParcel, setSelectedParcel] = useState(null);
+    const [selectedParcel, setSelectedParcel] = useState<IGraphic>();
 
     // ----- JSAPI State -----
-    const [mapView, setMapView] = useState(null);
-    const [parcelLayerView, setParcelLayerView] = useState(null);
-    const [parcelHighightHandle, setParcelHighightHandle] = useState(null);
+    const [mapView, setMapView] = useState<IMapView>();
+    const [parcelLayerView, setParcelLayerView] = useState<IFeatureLayerView>();
+    const [parcelHighightHandle, setParcelHighightHandle] = useState<IHandle>();
 
     // Setters
-    const updateMapView = async (mapView) => {
+    const updateMapView = async (mapView: IMapView) => {
         // Add mapView to context
         await _updateMapView({ mapView, setParcelLayerView }, setMapView);
     };
 
-    const updateSelectedParcel = async (value) => {
+    const updateSelectedParcel = async (featureSelect:IGraphic) => {
         await _updateSelectedParcel(
-            { mapView, parcelLayerView, value, parcelHighightHandle, setParcelHighightHandle },
+            { mapView, parcelLayerView, featureSelect, parcelHighightHandle, setParcelHighightHandle },
             setSelectedParcel
         );
     };
@@ -33,7 +43,6 @@ export const AppContextProvider = ({ children }) => {
                 mapView,
                 updateMapView,
                 parcelLayerView,
-
                 //App Data
                 selectedParcel,
                 updateSelectedParcel,

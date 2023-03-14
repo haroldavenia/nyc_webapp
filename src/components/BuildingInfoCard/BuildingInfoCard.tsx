@@ -9,12 +9,8 @@ import { faHouseBuilding } from '@fortawesome/pro-duotone-svg-icons';
 import { StyledCol, StyledLabel, StyledRow, StyledValue } from './BuildingInfoCard-styled';
 import BasicCard from '../BasicCard';
 
-const BuildingInfoCard = ({
-    className,
-    ...props
-}) => {
+const BuildingInfoCard = (props: any) => {
     const [t] = useTranslation();
-
     return (
         <BasicCard title={'Building Information'} icon={faHouseBuilding}>
             <StyledRow>

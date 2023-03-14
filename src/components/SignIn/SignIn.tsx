@@ -14,12 +14,16 @@ import { useAccountsContext } from '../../context/AccountsContext';
 // Internationalization
 import { useTranslation } from 'react-i18next';
 
-const SignIn = ({ signingOut }) => {
+interface IProps {
+    signingOut: true
+}
+
+const SignIn: React.FC<IProps> = ({ signingOut }) => {
     // ----- Language -----
     const { t } = useTranslation();
 
     // ----- Context -----
-    const { signIn, signOut, errorMessage } = useAccountsContext();
+    const { signIn, signOut, errorMessage }: any = useAccountsContext();
 
     return (
         <SignInContainer>
