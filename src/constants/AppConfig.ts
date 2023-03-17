@@ -6,15 +6,29 @@ const AppConfig = {
         portalUrl: 'https://nyc.maps.arcgis.com',
     },
     baemap_imagery_id: 'arcgis-imagery',
-    webmap: '12150eb2fa5241df853b82f421a689eb',
-    webmap_old: 'e7ea535229244286932bb08c4e0b9a5b',
-    parcelLayer: {
-        itemId: '85cbdb7442034b099cf85ca62ecd302d',
-        index: 0,
+    webmap2d: {
+        type: "2D",
+        id: '255d7693e1f242139d35b8f626f07700',
+        parcelLayer: {
+            itemId: '29854166b5ab49f5a87065510290ba05',
+            index: 0,
+        },
+        detailsLayers: {
+            itemId: '4dbe1e6c55ca49bab753f0e143f379cb',
+            id: 'DOF_Sourced_PTS_Data_Daily_Descriptive_Exemption_ETC_6442',
+        }
     },
-    detailsLayers: {
-        itemId: '4dbe1e6c55ca49bab753f0e143f379cb',
-        id: 'DOF_Sourced_PTS_Data_Daily_Descriptive_Exemption_ETC_2817',
+    webmap3d: {
+        type: "3D",
+        id: 'cb99d35cfe364a6c8ab50e16b9b36b23',
+        parcelLayer: {
+            itemId: '29854166b5ab49f5a87065510290ba05',
+            index: 0,
+        },
+        detailsLayers: {
+            itemId: '4dbe1e6c55ca49bab753f0e143f379cb',
+            id: 'DOF_Sourced_PTS_Data_Daily_Descriptive_Exemption_ETC_6442',
+        }
     },
     searchResultZoom: 16,
 };
